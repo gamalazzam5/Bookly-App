@@ -22,3 +22,4 @@ class FeaturedBooksListView extends StatelessWidget {
     );
   }
 }
+
