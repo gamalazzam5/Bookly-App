@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/styles.dart';
 
 class BookRating extends StatelessWidget {
-  const BookRating({super.key});
-
+  const BookRating({super.key,  this.mainAxisAlignment = MainAxisAlignment.start});
+ final MainAxisAlignment mainAxisAlignment ;
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment ,
       children: [
-        const Icon(Icons.star,color: Color(0xFFFFDD4F),),
+        const Icon(Icons.star,color: Color(0xFFFFDD4F),size: 14,),
         const SizedBox(width: 6.3,),
         Text('4.8',style: TextStyles.textStyle16,),
         const SizedBox(width: 5,),
 
-        Text("(245)",style: TextStyles.textStyle14.copyWith(color: Color(0xFF707070)),)
+        Opacity(
+            opacity: .5,
+            child: Text("(245)",style: TextStyles.textStyle14.copyWith(fontWeight: FontWeight.w600),))
       ],
     );
   }
