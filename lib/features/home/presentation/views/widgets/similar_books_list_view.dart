@@ -1,4 +1,8 @@
+import 'package:bookly_app/core/widgets/custom_error_widget.dart';
+import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
+import 'package:bookly_app/features/home/presentation/manager/similar_books_cubit/similar_books_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'custom_book_image.dart';
 
@@ -7,20 +11,31 @@ class SimilarBooksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .12,
-      child: Padding(
-        padding: EdgeInsets.only(left: 16),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) {
-            return  Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: CustomBookImage(imageUrl: 'https://img-c.udemycdn.com/user/50x50/91236184_0105.jpg',),
-            );
-          },
-        ),
-      ),
+    return BlocBuilder<SimilarBooksCubit,SimilarBooksState>(
+      builder: (_,state){
+        if(state is SimilarBooksSuccess){
+          return  SizedBox(
+            height: MediaQuery.of(context).size.height * .12,
+            child: Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  return  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: CustomBookImage(imageUrl: 'https://img-c.udemycdn.com/user/50x50/91236184_0105.jpg',),
+                  );
+                },
+              ),
+            ),
+          );
+        }else if(state is SimilarBooksFailure){
+          return CustomErrorWidget(errMessage: state.errMessage);
+        }else{
+          return CustomLoadingIndicator();
+        }
+      }
+
     );
   }
 }
