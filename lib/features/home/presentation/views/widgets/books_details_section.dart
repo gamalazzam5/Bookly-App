@@ -35,7 +35,7 @@ final BookModel bookModel;
         const SizedBox(height: 16),
         BookRating(mainAxisAlignment: MainAxisAlignment.center,rating:bookModel.volumeInfo.averageRating??0,count: bookModel.volumeInfo.ratingsCount??0,),
         const SizedBox(height: 37),
-        const BooksAction(),
+         BooksAction(bookModel: bookModel,),
       ],
     );
   }

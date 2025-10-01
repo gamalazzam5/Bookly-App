@@ -1,8 +1,6 @@
-import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/assets.dart';
 
 class CustomBookImage extends StatelessWidget {
   const CustomBookImage({super.key, required this.imageUrl});
