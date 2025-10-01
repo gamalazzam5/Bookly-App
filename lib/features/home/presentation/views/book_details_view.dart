@@ -22,7 +22,7 @@ BlocProvider.of<SimilarBooksCubit>(context).fetchSimilarBooks(category: widget.b
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: const BookDetailsViewAppBar(),
-      body: SafeArea(child: BookDetailsViewBody()),
+      body: SafeArea(child: BookDetailsViewBody(bookModel: widget.bookModel,)),
     );
   }
 }
