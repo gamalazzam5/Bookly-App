@@ -15,7 +15,7 @@ class BookDetailsSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .25),
-          child: CustomBookImage(),
+          child: CustomBookImage( imageUrl: 'https://img-c.udemycdn.com/user/50x50/91236184_0105.jpg',),
         ),
         const SizedBox(height: 24),
         Text('The Jungle Book', style: TextStyles.textStyle30),
