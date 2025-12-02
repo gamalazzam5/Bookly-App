@@ -1,7 +1,7 @@
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bookly_app/core/models/book_model/book_model.dart';
-import 'package:bookly_app/core/repos/home_repo.dart';
+import '../../../../home/domain/repositories/home_repo.dart';
 
 part 'suggestions_state.dart';
 
@@ -14,10 +14,10 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
 
     emit(SuggestionsLoading());
 
-    final result = await homeRepo.fetchSearchBooks(query: query);
-    result.fold(
-          (failure) => emit(SuggestionsFailure(failure.errMessage)),
-          (books) => emit(SuggestionsSuccess(books.take(5).toList())),
-    );
+    // final result = await homeRepo.fetchSearchBooks(query: query);
+    // result.fold(
+    //       (failure) => emit(SuggestionsFailure(failure.errMessage)),
+    //       (books) => emit(SuggestionsSuccess(books.take(5).toList())),
+    // );
   }
 }

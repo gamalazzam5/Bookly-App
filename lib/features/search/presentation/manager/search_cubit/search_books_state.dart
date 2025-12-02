@@ -18,7 +18,7 @@ final class SearchBooksFailure extends SearchBooksState {
 }
 
 final class SearchBooksSuccess extends SearchBooksState {
-  final List<BookModel> books;
+  final List<BookEntity> books;
 
   const SearchBooksSuccess({required this.books});
 }

@@ -1,12 +1,12 @@
 import 'package:bookly_app/core/functions/launch_url.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/models/book_model/book_model.dart';
 import '../../../../../core/widgets/custom_button.dart';
 
 class BooksAction extends StatelessWidget {
-  const BooksAction({super.key, required this.bookModel});
+  const BooksAction({super.key, required this.bookEntity});
 
-  final BookModel bookModel;
+  final BookEntity bookEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,12 @@ class BooksAction extends StatelessWidget {
         const CustomButton(text: '0.00€'),
         CustomButton(
           onPressed: () {
-            if (bookModel.volumeInfo.previewLink == null) {
+            if (bookEntity.previewLink == null) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('you can not launch this book')),
               );
             } else {
-              launchTheUrl(bookModel.volumeInfo.previewLink!);
+              launchTheUrl(bookEntity.previewLink!);
             }
           },
           backgroundColor: Color(0xFFEF8262),
@@ -30,7 +30,7 @@ class BooksAction extends StatelessWidget {
           bottomLeft: 0,
           bottomRight: 16,
           textColor: Colors.white,
-          text: getText(bookModel),
+          text: getText(bookEntity),
           fontSize: 16,
         ),
       ],
@@ -38,8 +38,8 @@ class BooksAction extends StatelessWidget {
   }
 }
 
-String getText(BookModel bookModel) {
-  if (bookModel.volumeInfo.previewLink == null) {
+String getText(BookEntity bookEntity) {
+  if (bookEntity.previewLink==null) {
     return 'Not Available';
   } else {
     return 'Preview';

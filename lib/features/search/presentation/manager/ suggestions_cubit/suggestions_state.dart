@@ -20,7 +20,7 @@ final class SuggestionsFailure extends SuggestionsState {
 }
 
 final class SuggestionsSuccess extends SuggestionsState {
-  final List<BookModel> suggestions;
+  final List<BookEntity> suggestions;
   const SuggestionsSuccess(this.suggestions);
 
   @override

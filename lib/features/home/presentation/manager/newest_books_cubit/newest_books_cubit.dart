@@ -1,20 +1,26 @@
+import 'package:bookly_app/features/home/domain/usecases/fetch_newest_books_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/book_entity.dart';
 
-import '../../../../../core/models/book_model/book_model.dart';
-import '../../../../../core/repos/home_repo.dart';
 part 'newest_books_state.dart';
 
 class NewestBooksCubit extends Cubit<NewestBooksState> {
-  NewestBooksCubit(this.homeRepo) : super(NewestBooksInitial());
-  final HomeRepo homeRepo;
+  NewestBooksCubit(this.newestBooksUseCase) : super(NewestBooksInitial());
+  FetchNewestBooksUseCase newestBooksUseCase;
 
-  Future<void> fetchNewestBooks() async {
-    emit(NewestBooksLoading());
-    var result = await homeRepo.fetchNewestBooks();
-    result.fold((failure) {
-      emit(NewestBooksFailure(errMessage: failure.errMessage));
-    }, (books) {
-      emit(NewestBooksSuccess(books: books));
-    });
-  }}
+  Future<void> fetchNewestBooksUseCase({int pageNumber = 0}) async {
+    if (pageNumber == 0) {
+      emit(NewestBooksLoading());
+    }
+    emit(NewestBooksPaginationLoading());
+    var result = await newestBooksUseCase.call(pageNumber);
+    result.fold((failed) {
+      if (pageNumber == 0) {
+        emit(NewestBooksFailure(errMessage: failed.errMessage));
+      } else {
+        emit(NewestBooksPaginationFailure(errMessage: failed.errMessage));
+      }
+    }, (books) => emit(NewestBooksSuccess(books: books)));
+  }
+}
