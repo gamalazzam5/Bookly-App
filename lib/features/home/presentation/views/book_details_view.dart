@@ -16,7 +16,6 @@ class _BookDetailsViewState extends State<BookDetailsView> {
   @override
   void initState() {
     super.initState();
- // BlocProvider.of<SimilarBooksCubit>(context).fetchSimilarBooks(category: widget.bookEntity.categories[0]);
   }
   @override
   Widget build(BuildContext context) {
